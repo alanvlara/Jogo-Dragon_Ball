@@ -1,0 +1,60 @@
+<div class="container-fluid bg-warning-subtle">
+    <div class="container d-flex justify-content-between flex-column vh-100 ">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-5">
+                <div class="vida jogador1 p-0 m-0 overflow-hidden">
+                    <div [ngStyle]="defineVidaPlayer()" id="vida-player" class="percentual-player"></div>
+                </div>
+                <div class="text-center fs-3 fw-bold">
+                    {{heroi}}
+                </div>
+            </div>        
+            <div class="nivel col-2">
+                {{faseAtual + 1}}
+            </div>
+            <div class="col-5">
+                <div class="vida jogador2 p-0 m-0 overflow-hidden">
+                    <div [ngStyle]="defineVidaInimigo()" class="percentual-inimigo"></div>
+                </div>
+                <div class="text-center fs-3 fw-bold">
+                    {{inimigoAtual.nome}}
+                </div>
+            </div>        
+        </div>
+
+        <div class="row h-75 m-3 body border d-flex justify-content-center border-5 border-secondary rounded overflow-hidden">
+            <div class="div h-50">
+                <div class="row">
+                    <div class="col fw-bold d-flex justify-content-start">
+                        <div class="container bg-white w-25 border border-5 rounded m-0">
+                        {{player.nivel}}
+                        xp : {{player.xp}}/{{player.proximoNivel}}
+                        Ataque: {{0.6*player.ataqueMaximo|number: '1.0-0'}}-{{player.ataqueMaximo}}                        </div>
+                        
+                    </div>
+                    <div class="col text-center fw-bold">
+                    </div>
+                </div>
+            </div>
+            <div [ngClass]="{'justify-content-between': (!playerAtacando && !inimigoAtacando), 'justify-content-end': playerAtacando, 'justify-content-start': inimigoAtacando}" class="col h-50 jogador d-flex px-5 flex-end">
+                <img src={{urlPlayer}} alt="">
+                <img src={{urlInimigo}} alt="" class="inimigo">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 border border-5 p-3 border-danger rounded-pill bg-warning">
+                <div class="row">
+                    <div class="col-6 d-flex justify-content-center">
+                        <button [disabled]="playerAtacando||inimigoAtacando||playerCurando||inimigoCurando" class="btn btn-danger px-md-5 py-md-4" (click)="atacar()">ATACAR</button>
+                    </div>
+                    <div class="col-6 d-flex justify-content-center">
+                        <button [disabled]="playerAtacando||inimigoAtacando||playerCurando||inimigoCurando" class="btn btn-success px-md-5 py-md-4" (click)="curar()">CURAR</button>
+                    </div>
+                    <!-- <div>
+                        <button (click)="imprimeCara()">Imprime Objeto Player</button>
+                    </div> -->
+                </div>
+            </div>        
+        </div>
+    </div>
+</div>
